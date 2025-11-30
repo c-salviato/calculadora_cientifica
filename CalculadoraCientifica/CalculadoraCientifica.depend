@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1764544854 source:c:\users\55159\documents\projetocalcemc\calculadoracientifica\mate.c
+	"mate.h"
+
+1764544533 c:\users\55159\documents\projetocalcemc\calculadoracientifica\mate.h
+
+1764545063 source:c:\users\55159\documents\projetocalcemc\calculadoracientifica\main.c
+	<stdio.h>
+	<string.h>
+	<locale.h>
+	"mate.h"
+
