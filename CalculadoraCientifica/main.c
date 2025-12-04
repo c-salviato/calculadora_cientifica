@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <locale.h>
 #include "mate.h"
+#include <math.h>
 
 int main(){
 
@@ -19,7 +20,7 @@ int main(){
 
     do{
 
-        printf("Escolha uma opção: \nSoma: 1\nSubtração: 2\nMultiplição: 3\nDivisão: 4\nFechar Calculadora Cientifica: 0\n");
+        printf("Escolha uma opção: \nSoma: 1\nSubtração: 2\nMultiplição: 3\nDivisão: 4\nPotencia: 5\nRaiz: 6\nFechar Calculadora Cientifica: 0\n");
         scanf("%d",&opc);
         if(opc != 0){
             printf("Digite um valor: \n");
@@ -38,6 +39,12 @@ int main(){
                 break;
             case 4:
                 n1 = dividir(n1,n2);
+                break;
+            case 5:
+                n1 = pow(n1,n2); //Usamos math.h
+                break;
+            case 6:
+                n1 = pow(n1,1.0/n2); //Usamos math.h
                 break;
             case 0:
                 printf("Fechando Calculadora Cientifica...");
