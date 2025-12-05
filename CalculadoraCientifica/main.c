@@ -7,7 +7,7 @@ int main(){
 
     setlocale(LC_ALL, "Portuguese");
 
-    int opc;
+    char opc;
     float n1, n2;
 
 
@@ -20,41 +20,41 @@ int main(){
 
     do{
 
-        printf("Escolha uma opção: \nSoma: 1\nSubtração: 2\nMultiplição: 3\nDivisão: 4\nPotencia: 5\nRaiz: 6\nFechar Calculadora Cientifica: 0\n");
-        scanf("%d",&opc);
-        if(opc != 0){
+        printf("Escolha uma opção: \n+: Soma\n-: Subtração\n*: Multiplição\n/: Divisão\n^: Potência\nR: Raiz\n0: Fechar Calculadora Cientifica\n");
+        scanf(" %c",&opc);
+        if(opc != '0'){
             printf("Digite um valor: \n");
             scanf("%f",&n2);
         }
         switch(opc){
 
-            case 1:
+            case '+':
                 n1 = somar(n1,n2);
                 break;
-            case 2:
+            case '-':
                 n1 = subtrair(n1,n2);
                 break;
-            case 3:
+            case '*':
                 n1 = multiplicar(n1,n2);
                 break;
-            case 4:
+            case '/':
                 n1 = dividir(n1,n2);
                 break;
-            case 5:
+            case '^':
                 n1 = pow(n1,n2); //Usamos math.h
                 break;
-            case 6:
+            case 'R':
                 n1 = pow(n1,1.0/n2); //Usamos math.h
                 break;
-            case 0:
+            case '0':
                 printf("Fechando Calculadora Cientifica...");
                 break;
         }
-        if(opc != 0){
+        if(opc != '0'){
             printf("O resultado é: %f\n", n1);
         }
 
-    }while(opc != 0);
+    }while(opc != '0');
 
 
 }
