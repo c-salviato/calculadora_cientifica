@@ -21,3 +21,11 @@
 1764686758 source:c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\mate.c
 	"mate.h"
 
+1765161240 source:c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\main.c
+	<stdio.h>
+	<locale.h>
+	"mate.h"
+	<math.h>
+
+1765161240 c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\mate.h
+
