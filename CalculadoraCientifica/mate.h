@@ -18,6 +18,11 @@ float somar(float a, float b);
 float subtrair(float a, float b);
 float multiplicar(float a, float b);
 float dividir(float a, float b);
+float fatorial(float *a);
+void atribuir_pi(float **a);
+float euler();
+float exponencial(float a);
+float logaritmo(float a);
 
 //funcoes extras
 void limpar_e_reexibir_cabecalho(float n1_atual);

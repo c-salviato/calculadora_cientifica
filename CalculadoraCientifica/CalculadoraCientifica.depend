@@ -31,11 +31,20 @@
 	<stdio.h>
 	<stdlib.h>
 
-1765161240 source:c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\main.c
+1765478978 source:c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\main.c
 	<stdio.h>
 	<locale.h>
 	"mate.h"
 	<math.h>
+	<stdlib.h>
 
-1765161240 c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\mate.h
+1765480916 c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\mate.h
+	<stdio.h>
+	<stdlib.h>
+
+1765479153 source:c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\mate.c
+	"mate.h"
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
 

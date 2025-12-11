@@ -11,7 +11,7 @@ int main(){
     setlocale(LC_ALL, "Portuguese");
 
     char opc;
-    float n1, n2;
+    float n1, n2, res;
 
     limpar_e_reexibir_cabecalho(0.0f);
 
@@ -31,7 +31,7 @@ int main(){
         int precisa_de_n2 = 1;
         float n1_ini = n1;
 
-        if(opc != '0' && opc != 'c' && opc != 'H' && opc != 'L' && opc != '!' && opc != 'S' && opc != 'C' && opc != 'T'){
+        if(opc != '0' && opc != 'c' && opc != 'H' && opc != 'L' && opc != '!' && opc != 'S' && opc != 'C' && opc != 'T' && opc != 'P' && opc != 'E' && opc != 'X' && opc != 'G'){
              scanf("%f",&n2);
         } else {
              precisa_de_n2 = 0;
@@ -59,7 +59,7 @@ int main(){
                 break;
 
             case '!':
-                //ainda falta implementar
+                fatorial(&n1); //Usamos math.h
                 break;
 
             case 'S':
@@ -72,6 +72,30 @@ int main(){
 
             case 'T':
                 tan(n1);
+                break;
+
+            case 'P':
+                float *ptr = &n1;
+                float **pptr = &ptr;
+                atribuir_pi(pptr);
+                break;
+
+            case 'E':
+                n1 = euler();
+                break;
+
+            case 'X':
+                printf("Digite o valor: ");
+                scanf("%f", &n1);
+                res = exponencial(n1);
+                printf("Resultado: %.10lf\n", res);
+                break;
+
+            case 'G':
+                printf("Digite o valor: ");
+                scanf("%f", &n1);
+                n1 = logaritmo(n1);
+                printf("%f\n", n1);
                 break;
 
             case 'c':

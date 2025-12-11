@@ -1,6 +1,8 @@
 #include "mate.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 
 HistoricoEntrada historico[MAX_HISTORICO];
 int indice_historico = 0; // Contagem atual de entradas
@@ -22,17 +24,47 @@ float dividir(float a, float b) {
     }
     return a / b;
 }
-float fatorial(float n){
-    if (n < 0 || n != (int)n) {
+float fatorial(float *a){
+    if (*a < 0 || *a != (int)*a) {
         printf("Erro: o fatorial funciona só com inteiros positivos ou zero.\n");
+        return *a;
     }
-    int num = (int)n;
-    double resultado = 1;
+    int num = (int)*a;
+    float resultado = 1;
     for (int i = 1; i <= num; i++) {
-        resultado = resultado * i;
+        resultado *= i;
     }
-    return resultado;
+
+    *a = resultado;
+
+    return *a;
 }
+
+void atribuir_pi(float **a){
+    if(a ==  NULL || *a == NULL){
+        printf("Erro: ponteiro inválido ao atribuir PI.\n");
+        return;
+    }
+
+    **a = 3.14159265358979323846f;
+}
+
+float euler(){
+    return 2.7182818284;
+}
+
+float exponencial(float a){
+    return exp(a);
+}
+
+float logaritmo(float a){
+    if(a <= 0){
+        printf("Erro: Logaritmo só funciona com números maiores que zero.\n");
+        return 0;
+    }
+    return log(a);
+}
+
 void limpar_e_reexibir_cabecalho(float n1_atual) {
     #ifdef _WIN32
         system("cls");
@@ -40,7 +72,7 @@ void limpar_e_reexibir_cabecalho(float n1_atual) {
         system("clear");
     #endif
     printf("======== Bem vindo a Calculadora Cientifica ========\n");
-    printf("+: Soma\n-: Subtração\n*: Multiplição\n/: Divisão\n^: Potência\nR: Raiz\n!: Fatorial\nS: Seno\nC: Cosseno\nT: Tangente\nc: Limpar Tela\nH: Exibir Historico\nL: Limpar Historico0: Fechar Calculadora Cientifica\n");
+    printf("+: Soma\n-: Subtração\n*: Multiplição\n/: Divisão\n^: Potência\nR: Raiz\n!: Fatorial\nS: Seno\nC: Cosseno\nT: Tangente\nP: Pi\nE: Euler\nX: Exponencial\nG: Logaritmo\nc: Limpar Tela\nH: Exibir Historico\nL: Limpar Historico\n0: Fechar Calculadora Cientifica\n");
     printf("----------------------------------------------------\n");
 }
 
