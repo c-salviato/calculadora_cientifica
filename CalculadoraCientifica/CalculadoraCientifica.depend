@@ -15,16 +15,21 @@
 	<math.h>
 	<stdlib.h>
 
-1764976494 source:c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\main.c
+1765418244 source:c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\main.c
 	<stdio.h>
 	<locale.h>
 	"mate.h"
 	<math.h>
+	<stdlib.h>
 
-1764686758 c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\mate.h
+1765425236 c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\mate.h
+	<stdio.h>
+	<stdlib.h>
 
-1764686758 source:c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\mate.c
+1765425364 source:c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\mate.c
 	"mate.h"
+	<stdio.h>
+	<stdlib.h>
 
 1765161240 source:c:\users\alisson g borba\documents\github\calculadora_cientifica\calculadoracientifica\main.c
 	<stdio.h>

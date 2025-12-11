@@ -6,7 +6,6 @@
 #include <math.h>
 #include <stdlib.h>
 
-
 int main(){
 
     setlocale(LC_ALL, "Portuguese");
@@ -29,8 +28,13 @@ int main(){
     do{
         scanf(" %c",&opc);
 
-        if(opc != '0' && opc != 'C'){
-            scanf("%f",&n2);
+        int precisa_de_n2 = 1;
+        float n1_ini = n1;
+
+        if(opc != '0' && opc != 'C' && opc != 'H' && opc != 'L'){
+             scanf("%f",&n2);
+        } else {
+             precisa_de_n2 = 0;
         }
 
         switch(opc){
@@ -58,19 +62,33 @@ int main(){
                 limpar_e_reexibir_cabecalho(n1);
                 break;
 
+            case 'H':
+                exibir_historico_da_memoria();
+                break;
+
+            case 'L':
+                limpar_historico_da_memoria();
+                break;
+
             case '0':
                 printf("Fechando Calculadora Cientifica...");
+                salvar_historico_no_arquivo();
                 break;
 
             default:
                 printf("Opção inválida. Tente novamente.\n");
+                precisa_de_n2 = 0;
                 break;
         }
+        float resultado_n1 = n1;
 
-        if(opc != '0' && opc != 'C'){
+        if(precisa_de_n2 && opc != '0' && opc != 'C' && opc != 'H' && opc != 'L'){
+             adicionar_na_memoria(n1_ini, opc, n2, resultado_n1);
              printf("%f\n", n1);
         }
-
+        else if (opc != '0'){
+             printf("%f\n", n1);
+        }
 
     }while(opc != '0');
 
