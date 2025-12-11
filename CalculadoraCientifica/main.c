@@ -31,7 +31,7 @@ int main(){
         int precisa_de_n2 = 1;
         float n1_ini = n1;
 
-        if(opc != '0' && opc != 'C' && opc != 'H' && opc != 'L'){
+        if(opc != '0' && opc != 'c' && opc != 'H' && opc != 'L' && opc != '!' && opc != 'S' && opc != 'C' && opc != 'T'){
              scanf("%f",&n2);
         } else {
              precisa_de_n2 = 0;
@@ -58,7 +58,23 @@ int main(){
                 n1 = pow(n1,1.0/n2); //Usamos math.h
                 break;
 
+            case '!':
+                //ainda falta implementar
+                break;
+
+            case 'S':
+                sin(n1);
+                break;
+
             case 'C':
+                cos(n1);
+                break;
+
+            case 'T':
+                tan(n1);
+                break;
+
+            case 'c':
                 limpar_e_reexibir_cabecalho(n1);
                 break;
 
@@ -82,7 +98,7 @@ int main(){
         }
         float resultado_n1 = n1;
 
-        if(precisa_de_n2 && opc != '0' && opc != 'C' && opc != 'H' && opc != 'L'){
+        if(precisa_de_n2 && opc != '0' && opc != 'c' && opc != 'H' && opc != 'L'){
              adicionar_na_memoria(n1_ini, opc, n2, resultado_n1);
              printf("%f\n", n1);
         }

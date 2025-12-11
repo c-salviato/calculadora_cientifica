@@ -40,7 +40,7 @@ void limpar_e_reexibir_cabecalho(float n1_atual) {
         system("clear");
     #endif
     printf("======== Bem vindo a Calculadora Cientifica ========\n");
-    printf("+: Soma\n-: Subtração\n*: Multiplição\n/: Divisão\n^: Potência\nR: Raiz\nC: Limpar Tela\nH: Exibir Historico\nL: Limpar Historico0: Fechar Calculadora Cientifica\n");
+    printf("+: Soma\n-: Subtração\n*: Multiplição\n/: Divisão\n^: Potência\nR: Raiz\n!: Fatorial\nS: Seno\nC: Cosseno\nT: Tangente\nc: Limpar Tela\nH: Exibir Historico\nL: Limpar Historico0: Fechar Calculadora Cientifica\n");
     printf("----------------------------------------------------\n");
 }
 
