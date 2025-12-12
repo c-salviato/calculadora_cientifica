@@ -1,19 +1,22 @@
 # depslib dependency file v1.0
-1765405975 source:c:\users\55159\documents\projetocalcemc\calculadoracientifica\mate.c
+1765497668 source:c:\users\55159\documents\projetocalcemc\calculadoracientifica\mate.c
 	"mate.h"
 	<stdio.h>
 	<stdlib.h>
+	<math.h>
+	<string.h>
 
-1765404726 c:\users\55159\documents\projetocalcemc\calculadoracientifica\mate.h
+1765495339 c:\users\55159\documents\projetocalcemc\calculadoracientifica\mate.h
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 
-1765406215 source:c:\users\55159\documents\projetocalcemc\calculadoracientifica\main.c
+1765497257 source:c:\users\55159\documents\projetocalcemc\calculadoracientifica\main.c
 	<stdio.h>
-	<locale.h>
 	"mate.h"
 	<math.h>
 	<stdlib.h>
+	<string.h>
 
 1765418244 source:c:\users\jvict\onedrive\documentos\github\calculadora_cientifica\calculadoracientifica\main.c
 	<stdio.h>
