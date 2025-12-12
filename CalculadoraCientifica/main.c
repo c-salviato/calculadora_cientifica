@@ -13,7 +13,7 @@ int main(){
     inicializar_historico_dinamico();
 
     char opc;
-    double n1, n2, res;
+    double n1, n2;
 
     limpar_e_reexibir_cabecalho(0.0);
 
@@ -80,11 +80,11 @@ int main(){
                 break;
 
             case 'X':
-                n1 = exp(n1); // Usamos math.h
+                n1 = exponencial(n1);
                 break;
 
             case 'G':
-                n1 = logaritmo(n1); // Usamos math.h
+                n1 = logaritmo(n1);
                 break;
 
             case 'c':

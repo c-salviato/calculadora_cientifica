@@ -27,8 +27,6 @@ double subtrair(double a, double b);
 double multiplicar(double a, double b);
 double dividir(double a, double b);
 double fatorial(double *a);
-void atribuir_pi(double **a);
-double euler();
 double exponencial(double a);
 double logaritmo(double a);
 

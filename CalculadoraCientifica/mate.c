@@ -42,26 +42,6 @@ double fatorial(double *a){
     return *a;
 }
 
-void atribuir_pi(double **a){
-    if(a == NULL || *a == NULL){
-        printf("Erro: ponteiro invalido ao atribuir PI.\n");
-        return;
-    }
-
-    **a = 3.14159265358979323846;
-}
-
-double euler(){
-    return 2.7182818284;
-}
-
-double logaritmo(double a){
-    if(a <= 0){
-        printf("Erro: Logaritmo so funciona com números maiores que zero.\n");
-        return 0.0;
-    }
-    return log(a);
-}
 
 //funcoes extras(ainda importantes)
 
@@ -248,4 +228,64 @@ double input_valor() {
         }
     }
     return atof(str);
+}
+
+double logaritmo(double a) {
+    if (a <= 0.0) {
+        printf("Erro: Logaritmo so funciona com numeros maiores que zero.\n");
+        return 0.0;
+    }
+
+    int max_iteracoes = 100;
+
+    if (a == 1.0){
+        return 0.0;
+    }
+    double x = a;
+    double log_result = 0.0;
+
+    while (x > 2.0) {
+        x /= 2.0;
+        log_result += 0.6931471805599453;
+    }
+
+    double z = (x - 1.0) / (x + 1.0);
+    double termo = z;
+    double z_quadrado = z * z;
+    double soma_serie = z;
+
+    for (int n = 3; n < max_iteracoes; n += 2) {
+        termo *= z_quadrado;
+        soma_serie += termo / (double)n;
+    }
+
+    log_result += 2.0 * soma_serie;
+
+    return log_result;
+}
+
+double fatorial_custom(int n) {
+    if (n < 0) return 0.0;
+    if (n == 0 || n == 1) return 1.0;
+
+    double resultado = 1.0;
+    for (int i = 2; i <= n; i++) {
+        resultado *= i;
+    }
+    return resultado;
+}
+
+double exponencial(double a) {
+
+    int num_termos = 15;
+    double resultado = 0.0;
+
+    if (a > 700.0) return 1.0e+300;
+
+    for (int n = 0; n < num_termos; n++) {
+        double termo = pow(a, n) / fatorial_custom(n);
+        resultado += termo;
+    }
+
+    return resultado;
 }
