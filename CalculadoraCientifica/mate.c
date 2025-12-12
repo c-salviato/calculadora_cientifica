@@ -5,8 +5,9 @@
 #include <string.h>
 
 
-HistoricoEntrada historico[MAX_HISTORICO];
-int indice_historico = 0; // Contagem atual de entradas
+HistoricoEntrada *historico = NULL;
+int indice_historico = 0;
+int capacidade_historico = 0;
 
 double somar(double a, double b) {
     return a + b;
@@ -62,6 +63,8 @@ double logaritmo(double a){
     return log(a);
 }
 
+//funcoes extras(ainda importantes)
+
 void limpar_e_reexibir_cabecalho(double n1_atual) {
     #ifdef _WIN32
         system("cls");
@@ -75,20 +78,43 @@ void limpar_e_reexibir_cabecalho(double n1_atual) {
     printf("----------------------------------------------------\n");
 }
 
+void inicializar_historico_dinamico() {
+
+    historico = (HistoricoEntrada *)malloc(MAX_HISTORICO * sizeof(HistoricoEntrada));
+    if (historico == NULL) {
+        perror("Falha ao alocar memoria para o historico");
+        exit(EXIT_FAILURE);
+    }
+
+    capacidade_historico = MAX_HISTORICO;
+    carregar_historico_do_arquivo();
+    printf("[INFO] Historico dinamico inicializado com capacidade para %d entradas.\n", capacidade_historico);
+}
+
+void liberar_historico_dinamico() {
+    if (historico != NULL) {
+        free(historico);
+        historico = NULL;
+        indice_historico = 0;
+        capacidade_historico = 0;
+        printf("[INFO] Memória do histórico liberada.\n");
+    }
+}
+
+
 void carregar_historico_do_arquivo() {
     FILE *arquivo = fopen(NOME_ARQUIVO_HISTORICO, "r");
     char linha[100];
-    indice_historico = 0; // Resetar o índice antes de carregar
+    indice_historico = 0;
 
     if (arquivo == NULL) {
-        // Se o arquivo não existir, apenas iniciamos com o histórico vazio.
-        printf("[INFO] Histórico vazio ou arquivo não encontrado. Iniciando novo histórico.\n");
+        printf("[INFO] Historico vazio ou arquivo nao encontrado. Iniciando novo historico.\n");
         return;
     }
 
-    while (fgets(linha, sizeof(linha), arquivo) != NULL && indice_historico < MAX_HISTORICO) {
-        // Tenta ler 4 valores do arquivo
-        if (sscanf(linha, "%f,%c,%f,%f",
+    while (fgets(linha, sizeof(linha), arquivo) != NULL && indice_historico < capacidade_historico) {
+
+        if (sscanf(linha, "%lf,%c,%lf,%lf",
                      &historico[indice_historico].operando1,
                      &historico[indice_historico].operador,
                      &historico[indice_historico].operando2,
@@ -98,16 +124,16 @@ void carregar_historico_do_arquivo() {
         }
     }
 
-    printf("[INFO] %d entradas de histórico carregadas da última sessão.\n", indice_historico);
+    printf("[INFO] %d entradas de historico carregadas da ultima sessao.\n", indice_historico);
     fclose(arquivo);
 }
 
 void salvar_historico_no_arquivo() {
-    // Abre o arquivo em modo de escrita ("w" - write) para sobrescrever o conteúdo
+
     FILE *arquivo = fopen(NOME_ARQUIVO_HISTORICO, "w");
 
     if (arquivo == NULL) {
-        perror("Erro ao salvar o histórico no arquivo");
+        perror("Erro ao salvar o historico no arquivo");
         return;
     }
 
@@ -123,19 +149,37 @@ void salvar_historico_no_arquivo() {
 }
 
 void adicionar_na_memoria(double n1, char op, double n2, double resultado) {
-    if (indice_historico < MAX_HISTORICO) {
-        historico[indice_historico].operando1 = n1;
-        historico[indice_historico].operador = op;
-        historico[indice_historico].operando2 = n2;
-        historico[indice_historico].resultado = resultado;
-        indice_historico++;
-    } else {
-        printf("[Aviso] Histórico de memória cheio. Não foi possível adicionar nova entrada.\n");
+
+    if (indice_historico >= capacidade_historico) {
+
+        int nova_capacidade = capacidade_historico * 2;
+        HistoricoEntrada *temp = (HistoricoEntrada *)realloc(historico, nova_capacidade * sizeof(HistoricoEntrada));
+
+        if (temp == NULL) {
+            printf("ERRO: Falha ao expandir a memoria do historico.\n");
+            return;
+        }
+
+        historico = temp;
+        capacidade_historico = nova_capacidade;
+        printf("[INFO] Capacidade do historico expandida para %d entradas.\n", capacidade_historico);
     }
+
+    double n2_para_salvar = n2;
+
+    if (op == '!' || op == 'S' || op == 'C' || op == 'T' || op == 'X' || op == 'G') {
+        n2_para_salvar = VALOR_NULO_HISTORICO;
+    }
+
+    historico[indice_historico].operando1 = n1;
+    historico[indice_historico].operador = op;
+    historico[indice_historico].operando2 = n2_para_salvar;
+    historico[indice_historico].resultado = resultado;
+    indice_historico++;
 }
 
 void exibir_historico_da_memoria() {
-    printf("\n==== HISTÓRICO DE OPERAÇÕES (MEMÓRIA) (%d de %d) ====\n", indice_historico, MAX_HISTORICO);
+    printf("\n==== HISTORICO DE OPERACOES (MEMORIA) (%d de %d) ====\n", indice_historico, capacidade_historico);
     if (indice_historico == 0) {
         printf("O histórico está vazio.\n");
         printf("====================================================\n");
@@ -143,13 +187,26 @@ void exibir_historico_da_memoria() {
     }
 
     for (int i = 0; i < indice_historico; i++) {
-        printf("%d. %.2f %c %.2f = %.2f\n",
-            i + 1,
-            historico[i].operando1,
-            historico[i].operador,
-            historico[i].operando2,
-            historico[i].resultado
-        );
+
+        if (historico[i].operando2 == VALOR_NULO_HISTORICO) {
+
+            printf("%d. %c(%.5lf) = %.5lf\n",
+                i + 1,
+                historico[i].operador,
+                historico[i].operando1,
+                historico[i].resultado
+            );
+
+        } else {
+
+            printf("%d. %.5lf %c %.5lf = %.5lf\n",
+                i + 1,
+                historico[i].operando1,
+                historico[i].operador,
+                historico[i].operando2,
+                historico[i].resultado
+            );
+        }
     }
     printf("====================================================\n");
 }

@@ -4,8 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+//variavel global historico
+extern void inicializar_historico_dinamico();
+extern void liberar_historico_dinamico();
+
 int main(){
 
+    inicializar_historico_dinamico();
 
     char opc;
     double n1, n2, res;
@@ -13,7 +18,7 @@ int main(){
     limpar_e_reexibir_cabecalho(0.0);
 
     printf("=== TUTORIAL BASICO ===\n");
-    printf("A calculadora funciona de forma sequencial. Explicacao: Voce digita o primeiro valor, depois escolhe uma das opcoes acima, depois outro valor e o resultado vai se acumulando!\n");
+    printf("A calculadora funciona de forma sequencial. Explicacao: Voce digita o primeiro valor, depois escolhe uma das opcoes de calculo acima, depois outro valor e o resultado vai se acumulando!\n");
     printf("Pressione ENTER depois de cada opcao ou valor inserido!\n");
     printf("- (Apos limpar a tela com a opcao 'c' o tutorial some!) -\n");
 
@@ -27,10 +32,14 @@ int main(){
         int precisa_de_n2 = 1;
         double n1_ini = n1;
 
-        if(opc != '0' && opc != 'c' && opc != 'H' && opc != 'L' && opc != '!' && opc != 'S' && opc != 'C' && opc != 'T' && opc != 'X' && opc != 'G'){
-             n2 = input_valor();
-        } else {
+        if(opc == '!' || opc == 'S' || opc == 'C' || opc == 'T' || opc == 'X' || opc == 'G'){
              precisa_de_n2 = 0;
+             n2 = 0.0;
+        } else if (opc == '0' || opc == 'c' || opc == 'H' || opc == 'L') {
+            precisa_de_n2 = 0;
+            n2 = 0.0;
+        } else {
+             n2 = input_valor();
         }
 
         switch(opc){
@@ -93,6 +102,7 @@ int main(){
             case '0':
                 printf("Fechando Calculadora Cientifica...");
                 salvar_historico_no_arquivo();
+                liberar_historico_dinamico();
                 break;
 
             default:
@@ -102,14 +112,13 @@ int main(){
         }
         double resultado_n1 = n1;
 
-        if(precisa_de_n2 && opc != '0' && opc != 'c' && opc != 'H' && opc != 'L'){
+        if(opc != '0' && opc != 'c' && opc != 'H' && opc != 'L' && opc != '\n' && opc != ' '){
              adicionar_na_memoria(n1_ini, opc, n2, resultado_n1);
-             printf("%.15lf\n", n1);
-        }
-        else if (opc != '0'){
-             printf("%.15lf\n", n1);
         }
 
+        if (opc != '0'){
+            printf("%.15lf\n", n1);
+        }
     }while(opc != '0');
 
     printf("\n");
